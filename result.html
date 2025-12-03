@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="{{ css_class }}">
+    <div class="result-container">
+        <h2>Pollutant Avg Prediction Result</h2>
+
+        <div class="result-box">
+            <p><strong>Predicted Pollutant Avg:</strong> {{ aqi_value }}</p>
+            <p><strong>Air Quality:</strong> {{ category }}</p>
+            <p><strong>State:</strong> {{ state }}</p>
+            <p><strong>City:</strong> {{ city }}</p>
+
+            <p><strong>Pollutant Min:</strong> {{ pollutant_min }}</p>
+            <p><strong>Pollutant Max:</strong> {{ pollutant_max }}</p>
+            <p><strong>Latitude:</strong> {{ latitude }}</p>
+            <p><strong>Longitude:</strong> {{ longitude }}</p>
+
+            <p><strong>Pollutants:</strong></p>
+            <p>{{ pollutants | join(", ") }}</p>
+        </div>
+
+        <a href="/" class="back-btn">Back</a>
+    </div>
+</body>
+</html>

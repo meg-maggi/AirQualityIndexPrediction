@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    text-align: center;
+    margin: 0;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    margin: 50px auto;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid gray;
+}
+
+button, .back-btn {
+    background: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+button:hover, .back-btn:hover {
+    background: #0056b3;
+}
+
+.result-container {
+    width: 500px;
+    margin: 60px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.result-box {
+    text-align: left;
+    margin-top: 20px;
+}
+
+/* Background based on AQI */
+.good {
+    background: linear-gradient(#a8ffbf, #6aff91);
+}
+
+.moderate {
+    background: linear-gradient(#ffe29a, #ffcc66);
+}
+
+.poor {
+    background: linear-gradient(#e55a55, #ff4d4d);
+}

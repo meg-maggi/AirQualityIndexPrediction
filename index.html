@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AQI Prediction</title>
+    <link rel="stylesheet" href="/static/style1.css">
+    <script>
+        async function loadCities() {
+            let state = document.getElementById("state").value;
+            const response = await fetch("/get_cities", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `state=${state}`
+            });
+            const data = await response.json();
+            let cityDropdown = document.getElementById("city");
+            cityDropdown.innerHTML = "<option value=''>Select City</option>";
+            data.cities.forEach(c => {
+                cityDropdown.innerHTML += `<option value="${c}">${c}</option>`;
+            });
+        }
+
+        async function fetchData() {
+            let state = document.getElementById("state").value;
+            let city = document.getElementById("city").value;
+
+            const response = await fetch("/fetch", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: `state=${state}&city=${city}`
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                let d = data.data;
+                document.getElementById("pollutant_min").value = d.pollutant_min;
+                document.getElementById("pollutant_max").value = d.pollutant_max;
+                document.getElementById("latitude").value = d.latitude;
+                document.getElementById("longitude").value = d.longitude;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>AQI Prediction System</h2>
+
+        <form action="/predict" method="POST">
+            <select id="state" name="state" required onchange="loadCities()">
+                <option value="">Select State</option>
+                {% for s in states %}
+                <option value="{{ s }}">{{ s }}</option>
+                {% endfor %}
+            </select>
+
+            <select id="city" name="city" required onchange="fetchData()">
+                <option value="">Select City</option>
+            </select>
+
+            <input type="text" id="pollutant_min" name="pollutant_min" placeholder="Pollutant Min" required>
+            <input type="text" id="pollutant_max" name="pollutant_max" placeholder="Pollutant Max" required>
+            <input type="text" id="latitude" name="latitude" placeholder="Latitude" required>
+            <input type="text" id="longitude" name="longitude" placeholder="Longitude" required>
+
+            <button type="submit">Predict Pollutant Avg</button>
+        </form>
+    </div>
+</body>
+</html>
